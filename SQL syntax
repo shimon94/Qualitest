@@ -1,0 +1,37 @@
+    // create table example:
+    
+CREATE TABLE Persons  //table name
+(
+ // set columns and their attributes 
+PersonID INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CompanyName varchar(255) UNIQUE,
+FirstName varchar(255),
+LastName varchar(255),
+Address varchar(255),
+City varchar(255),
+
+);
+
+   //popular data types:
+   
+INT //integers
+CHAR //  the CHAR data type always allocates the specified length, regardless of the length of the actual data stored
+VARCHAR // What makes VARCHAR popular is that values less than fifty characters take less space.  Space is allocated as needed.
+NVARCHAR // Use the NVARCHAR datatype to store Unicode text.  Since UNICODE characters occupy twice the space, NVARCHAR columns can store a maximum of 4,000 characters.
+DATETIME // Use the DATETIME data type to store the date and time.  An example of a DATATIME value is
+DECIMAL // defined by precision and scale.  The precision determines the number of total digits to store; whereas, scale determines the number of digits to the right of the decimal point.
+BIT // Boolean or Yes/No values
+
+FLOAT
+//FLOATs are really good for long numeric values. Though a DECIMAL value can have 38 digits total
+//Use both DECIMAL and FLOAT datatypes to work with decimal values such as 10.3.
+//If you need precise values, such as when working with financial or accounting data, then use DECIMAL.
+//The reason is the DECIMAL datatype allows you to define the number of decimal points to maintain.
+
+
+// A copy of an existing table can also be created, The new table gets the same column definitions. All columns or specific columns can be selected.
+CREATE TABLE TestTable AS   // לעשות מבנה חדש
+SELECT customername, contactname // אילו עמודות נרצה להעתיק
+FROM customers; // מאיזו טבלה ניקח את המידע         
+
+
