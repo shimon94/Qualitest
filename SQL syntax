@@ -1,0 +1,215 @@
+    // create table example:
+    
+CREATE TABLE Persons  //table name
+(
+ // set columns and their attributes 
+PersonID INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CompanyName varchar(255) UNIQUE,
+FirstName varchar(255),
+LastName varchar(255),
+Address varchar(255),
+City varchar(255),
+
+);
+
+   //popular data types:
+   
+INT //integers
+CHAR //  the CHAR data type always allocates the specified length, regardless of the length of the actual data stored
+VARCHAR // What makes VARCHAR popular is that values less than fifty characters take less space.  Space is allocated as needed.
+NVARCHAR // Use the NVARCHAR datatype to store Unicode text.  Since UNICODE characters occupy twice the space, NVARCHAR columns can store a maximum of 4,000 characters.
+DATETIME // Use the DATETIME data type to store the date and time.  An example of a DATATIME value is
+DECIMAL // defined by precision and scale.  The precision determines the number of total digits to store; whereas, scale determines the number of digits to the right of the decimal point.
+BIT // Boolean or Yes/No values
+
+FLOAT
+//FLOATs are really good for long numeric values. Though a DECIMAL value can have 38 digits total
+//Use both DECIMAL and FLOAT datatypes to work with decimal values such as 10.3.
+//If you need precise values, such as when working with financial or accounting data, then use DECIMAL.
+//The reason is the DECIMAL datatype allows you to define the number of decimal points to maintain.
+
+
+// A copy of an existing table can also be created, The new table gets the same column definitions. All columns or specific columns can be selected.
+CREATE TABLE TestTable AS   // לעשות מבנה חדש
+SELECT customername, contactname // אילו עמודות נרצה להעתיק
+FROM customers; // מאיזו טבלה ניקח את המידע         
+
+
+    //Some of The Most Important SQL Commands
+
+SELECT - extracts data from a database:
+SELECT column1, column2, ...
+FROM table_name;
+
+WHERE
+The WHERE clause is used to filter records.
+It is used to extract only those records that fulfill a specified condition.
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE Country='Mexico';, WHERE CustomerID=1;
+
+Operators in The WHERE Clause:
+=
+>
+<		
+>=		
+<=		
+<>	Not equal. Note: In some versions of SQL this operator may be written as !=	
+BETWEEN	Between a certain range	
+LIKE	Search for a pattern	
+IN	To specify multiple possible values for a column	
+
+The WHERE clause can be combined with AND, OR, and NOT operators.
+WHERE Country='Germany' AND (City='Berlin' OR City='München');
+WHERE NOT Country='Germany' AND NOT Country='USA';
+
+
+The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+ORDER BY Example
+ORDER BY column1, column2, ... ASC|DESC;
+ORDER BY Country, CustomerName;
+ORDER BY Country ASC, CustomerName DESC;
+
+
+The INSERT INTO statement is used to insert new records in a table.
+
+INSERT INTO table_name
+VALUES (value1, value2, value3, ...);
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');
+
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('Cardinal', 'Stavanger', 'Norway');
+
+
+IS NULL Syntax
+SELECT column_names
+FROM table_name
+WHERE column_name IS NULL;
+
+IS NOT NULL Syntax
+SELECT column_names
+FROM table_name
+WHERE column_name IS NOT NULL;
+
+SELECT CustomerName, ContactName, Address
+FROM Customers
+WHERE Address IS NOT NULL;
+
+
+The UPDATE statement is used to modify the existing records in a table.
+
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+
+UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+WHERE CustomerID = 1;
+
+UPDATE Multiple Records
+It is the WHERE clause that determines how many records will be updated.
+
+The following SQL statement will update the ContactName to "Juan" for all records where country is "Mexico":
+UPDATE Customers
+SET ContactName='Juan'
+WHERE Country='Mexico';
+
+Update Warning!
+Be careful when updating records. If you omit the WHERE clause, ALL records will be updated!
+
+
+SQL TOP, LIMIT and FETCH FIRST Examples
+The following SQL statement selects the first three records from the "Customers" table (for SQL Server/MS Access):
+
+Example
+SELECT TOP 3 * FROM Customers; // מחזיר את שלושת הפרמטרים הראשונים
+
+SELECT * FROM Customers
+LIMIT 3;
+
+The following SQL statement selects the first 50% of the records from the "Customers" table (for SQL Server/MS Access):
+
+SELECT TOP 50 PERCENT * FROM Customers; // מחזיר חצי טבלה
+
+SELECT TOP 3 * FROM Customers
+WHERE Country='Germany';
+
+SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;
+
+
+MIN() Syntax
+
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition;
+
+MAX() Syntax
+
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+
+SELECT MIN(Price) AS SmallestPrice
+FROM Products;
+
+
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+
+
+The COUNT() function returns the number of rows that matches a specified criterion.
+
+COUNT() Syntax
+
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+
+AVG() Syntax
+
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+
+SUM() Syntax
+
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+
+
+The SQL LIKE Operator
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+There are two wildcards often used in conjunction with the LIKE operator:
+
+ The percent sign (%) represents zero, one, or multiple characters
+ The underscore sign (_) represents one, single character
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+WHERE CustomerName LIKE 'a%'	Finds any values that start with "a"
+WHERE CustomerName LIKE '%a'	Finds any values that end with "a"
+WHERE CustomerName LIKE '%or%'	Finds any values that have "or" in any position
+WHERE CustomerName LIKE '_r%'	Finds any values that have "r" in the second position
+WHERE CustomerName LIKE 'a_%'	Finds any values that start with "a" and are at least 2 characters in length
+WHERE CustomerName LIKE 'a__%'	Finds any values that start with "a" and are at least 3 characters in length
+WHERE ContactName LIKE 'a%o'	Finds any values that start with "a" and ends with "o"
+* can use NOT LIKE
+
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%'; \\ מאתר את השמות שמתחילות באות א
+
+
+
+//memorize: 
+ALTER DATABASE - modifies a database
+ALTER TABLE - modifies a table
+CREATE INDEX - creates an index (search key)
