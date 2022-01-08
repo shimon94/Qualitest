@@ -14,6 +14,8 @@ City varchar(255),
 
    //popular data types:
    
+972556645273 
+
 INT //integers
 CHAR //  the CHAR data type always allocates the specified length, regardless of the length of the actual data stored
 VARCHAR // What makes VARCHAR popular is that values less than fifty characters take less space.  Space is allocated as needed.
